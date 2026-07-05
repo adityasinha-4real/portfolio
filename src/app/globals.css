@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #0a0908;
+  --bone: #f4f1ea;
+  --smoke: #1a1815;
+  --ash: #8a857d;
+  --rust: #b8492a;
+  --edge: rgba(244, 241, 234, 0.08);
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  font-size: 110%;
+}
+
+html,
+body {
+  background: var(--ink);
+  color: var(--bone);
+  overscroll-behavior: none;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "ss02", "cv11";
+}
+
+::selection {
+  background: var(--bone);
+  color: var(--ink);
+}
+
+/* Hide default cursor once custom cursor mounts */
+html.has-cursor,
+html.has-cursor * {
+  cursor: none !important;
+}
+
+/* Firefox custom cursor fallback */
+@supports (-moz-appearance: none) {
+  html.has-cursor,
+  html.has-cursor * {
+    cursor: default !important;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Utility: hairline */
+.hairline {
+  background: linear-gradient(90deg, transparent, var(--edge) 20%, var(--edge) 80%, transparent);
+  height: 1px;
+}
+
+/* Marquee-safe overflow */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Splitting text base */
+.split-line {
+  display: block;
+  overflow: hidden;
+}
+.split-line > span {
+  display: inline-block;
+  will-change: transform;
+}
