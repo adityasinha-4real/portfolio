@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   title: `${IDENTITY.name} — ${IDENTITY.role}`,
   description:
     "AI/ML engineer and full-stack developer. Applied AI, systems, visualization, research.",
-  metadataBase: new URL("https://yourdomain.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   openGraph: {
     title: `${IDENTITY.name} — ${IDENTITY.role}`,
     description: "Applied AI, systems, visualization, research.",
