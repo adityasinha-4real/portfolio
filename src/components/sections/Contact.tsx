@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { CONTACT, IDENTITY } from "@/constants/data";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { Reveal, RevealText } from "@/components/ui/Reveal";
-import { ArrowUpRight, Github, Linkedin, MapPin, Send, Twitter } from "lucide-react";
+import { ArrowUpRight, Github, Linkedin, MapPin, Send, Twitter, type LucideIcon } from "lucide-react";
 
 export function Contact() {
   return (
@@ -269,7 +269,7 @@ function ChannelIcon({
   label,
   index = 0,
 }: {
-  icon: React.ComponentType<{ size?: number; strokeWidth?: number }>;
+  icon: LucideIcon;
   href: string;
   label: string;
   index?: number;
