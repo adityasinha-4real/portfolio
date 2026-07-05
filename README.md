@@ -1,100 +1,99 @@
-# STRUCTURED — Portfolio
+# Aditya Sinha — Portfolio
 
-A cinematic interactive portfolio for an AI/ML engineer & full-stack developer.
-Editorial monochrome direction. Scroll-driven camera. Custom GLSL. Film grain.
-Built with Next.js 15, React 19, R3F, Framer Motion, GSAP-ready, Lenis smooth scroll.
+A cinematic, editorial-monochrome portfolio for an AI/ML engineer, backend developer, and data scientist. Scroll-driven 3D camera, custom GLSL shaders, film grain, and magnetic UI — built to feel like a designed object, not a template.
+
+**Repo:** [github.com/adityasinha-4real/portfolio](https://github.com/adityasinha-4real/portfolio)
 
 ## Stack
 
 - **Next.js 15** (App Router) + **React 19**
 - **TypeScript**, strict mode
-- **TailwindCSS** with editorial type scale
-- **@react-three/fiber** + **@react-three/drei** + **three.js**
-- **Framer Motion** for UI motion, custom cursor, magnetic buttons
+- **Tailwind CSS** with a custom editorial type scale
+- **@react-three/fiber** + **@react-three/drei** + **three.js** for the 3D hero
+- **Framer Motion** for UI motion, custom cursor, and magnetic buttons
 - **Lenis** smooth scrolling
-- **GSAP** included (ready for advanced scroll timelines)
-- **Custom GLSL** shaders (fresnel + simplex noise displacement)
+- **GSAP** included for advanced scroll timelines
+- Custom **GLSL** shaders (fresnel + simplex noise displacement)
+- **lucide-react** icons
 
-## Setup
+## Sections
+
+- **Loader** — particle assembly + wordmark clip reveal on first load
+- **Hero** — fixed R3F canvas behind a scroll+mouse-driven camera, shader figure, particle field, and portrait
+- **About** — editorial two-column layout with pillars and a parallax marker
+- **Projects** — sticky metadata rail, parallax visuals, generated architecture diagrams, per-project metrics
+- **Tech** — interactive SVG constellation of the stack with hover states
+- **Experience** — scroll-driven timeline with a progress line
+- **Contact** — large closing statement, social channel grid, and a working contact form (Web3Forms)
+- **Navigation** — top nav with a resume download button and a links dropdown (email, GitHub, LinkedIn, X, hosted resume)
+- **Cursor** — custom cursor with magnetic targets and contextual labels
+- **Grain** — SVG turbulence overlay for texture
+
+## Getting Started
 
 ```bash
-pnpm install     # or npm / yarn / bun
-pnpm dev
+npm install
+cp .env.example .env.local   # fill in the values below
+npm run dev
 ```
 
 Then open [http://localhost:3000](http://localhost:3000).
 
+### Environment Variables
+
+| Variable | Description |
+| --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | Canonical URL of the deployed site, used for metadata |
+| `NEXT_PUBLIC_WEB3FORMS_KEY` | Access key for [Web3Forms](https://web3forms.com), powers the contact form |
+
+### Scripts
+
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the dev server |
+| `npm run build` | Production build |
+| `npm run start` | Serve the production build |
+| `npm run lint` | Lint with ESLint |
+| `npm run typecheck` | Type-check with `tsc --noEmit` |
+
 ## Deploy (Vercel)
 
-```bash
-vercel
-```
-
-Zero config. All heavy assets are in-code (shaders, particles). No external CDN
-dependencies.
-
-## What's implemented
-
-- **Loader** — particle assembly + wordmark clip reveal
-- **Hero** — fixed R3F canvas, shader figure, particle field, scroll+mouse camera rig
-- **About** — editorial two-column with pillars and parallax marker
-- **Projects** — sticky metadata rail, parallax visuals with generated architecture glyphs, per-project metrics
-- **Tech** — interactive SVG constellation with hover state and workflow bridges
-- **Experience** — scroll-driven timeline with progress line
-- **Contact** — colossal close, channel grid, running marquee
-- **Cursor** — custom cursor with expansion, magnetic targets, and labels
-- **Grain** — SVG turbulence overlay
-- **Navigation** — minimalist top nav with numbered chapters
+Import this repo at [vercel.com/new](https://vercel.com/new), add the environment variables above, and deploy. No extra config needed — all heavy assets (shaders, particles) are generated in-code, no external CDN dependencies.
 
 ## Customize
 
-- **Content**: `src/constants/data.ts` — every string, project, metric, and link
-  in one place. Change `IDENTITY.name`, `email`, socials, and the `PROJECTS`
-  array to your real work.
-- **Palette**: `tailwind.config.ts` — `ink`, `bone`, `smoke`, `ash`, `rust`
-- **Type scale**: `tailwind.config.ts` — `colossal`, `editorial`, `title`, `micro`
-- **Fonts**: `src/app/layout.tsx` — swap Fraunces / Inter / JetBrains Mono for
-  your chosen faces
-- **3D figure**: `src/components/canvas/HeroFigure.tsx` — the shader, geometry,
-  and rotation live here
-- **Shader**: `src/shaders/figure.vert.ts` and `figure.frag.ts` — displacement,
-  fresnel, color mixing
-- **Camera path**: `src/components/canvas/CameraRig.tsx` — `CAMERA_KEYFRAMES`
-  drives the scroll-controlled camera through six positions
-- **Loading time**: `src/components/loader/Loader.tsx` — `DURATION_MS`
+- **Content**: [src/constants/data.ts](src/constants/data.ts) — identity, hero copy, projects, tech list, experience, education, certifications, and contact copy all live here
+- **Palette**: [tailwind.config.ts](tailwind.config.ts) — `ink`, `bone`, `smoke`, `ash`, `rust`
+- **Type scale**: [tailwind.config.ts](tailwind.config.ts) — `colossal`, `editorial`, `title`, `micro`
+- **Fonts**: [src/app/layout.tsx](src/app/layout.tsx) — Fraunces / Inter / JetBrains Mono
+- **3D hero**: [src/components/canvas/HeroCanvas.tsx](src/components/canvas/HeroCanvas.tsx), [HeroFigure.tsx](src/components/canvas/HeroFigure.tsx), and [CameraRig.tsx](src/components/canvas/CameraRig.tsx) (`CAMERA_KEYFRAMES`)
+- **Shaders**: [src/shaders/figure.vert.ts](src/shaders/figure.vert.ts) and [figure.frag.ts](src/shaders/figure.frag.ts)
+- **Loader timing**: [src/components/loader/Loader.tsx](src/components/loader/Loader.tsx) — `DURATION_MS`
+- **Resume**: replace [public/resume.pdf](public/resume.pdf); the nav download button and the hosted-resume link in the Links dropdown are both wired in [src/components/ui/Navigation.tsx](src/components/ui/Navigation.tsx)
 
 ## Extending
 
-- **New sections**: add to `src/components/sections/`, mount from
-  `src/app/page.tsx`, and register an id + a link in
-  `src/components/ui/Navigation.tsx`. Add a keyframe to `CAMERA_KEYFRAMES` if you
-  want the camera to visit a new position.
-- **Real 3D per project**: replace `ArchitectureGlyph` in
-  `src/components/sections/Projects.tsx` with a per-project R3F scene.
-- **Sound**: cursor and magnetic interactions have architecture hooks (`data-cursor`,
-  `data-magnetic`) — attach `use-sound` calls to enter/leave.
-- **CMS**: point `src/constants/data.ts` at Sanity, Contentlayer, or MDX. The
-  types will guide you.
+- **New sections**: add to `src/components/sections/`, mount from `src/app/page.tsx`, and register a link in `src/components/ui/Navigation.tsx`. Add a keyframe to `CAMERA_KEYFRAMES` if the camera should visit a new position.
+- **Per-project 3D**: replace the generated `ArchitectureFlow` diagram in `src/components/sections/Projects.tsx` with a bespoke R3F scene.
+- **Sound**: cursor and magnetic interactions expose hooks (`data-cursor`, `data-magnetic`) for `use-sound` calls on enter/leave.
+- **CMS**: point `src/constants/data.ts` at Sanity, Contentlayer, or MDX — the existing types guide the shape.
 
 ## Performance
 
-- R3F canvas is single, fixed, and persistent — no re-mounts between sections
+- Single, fixed, persistent R3F canvas — no re-mounts between sections
 - DPR capped at 1.75 (1.4 on mobile)
 - Simplex noise implemented in GLSL, not JS
 - Particle field is a single `BufferGeometry` — one draw call
-- Lenis is disabled under `prefers-reduced-motion`
+- Lenis disabled under `prefers-reduced-motion`
 - Grain is a static SVG data-URL, not an animated shader
-
-Target: 60fps on modern hardware, Lighthouse ≥ 90.
 
 ## Accessibility
 
 - Semantic sections and headings
 - Reduced-motion honored (Lenis disabled, animation durations collapsed)
 - Custom cursor only on `pointer: fine`
-- Focus styles inherit from browser defaults (extend as needed)
-- Keyboard nav on all links
+- Keyboard navigation on all links
 
 ## License
 
-MIT — do what you like. If you use it, drop a link.
+MIT
